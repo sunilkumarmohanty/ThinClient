@@ -1,0 +1,30 @@
+<div id="vnc-holder">
+
+  <div id="noVNC_status_bar">
+    <div id="noVNC_status">Loading</div>
+  </div>
+
+  <div id="noVNC_container">
+    <textarea id="noVNC_keyboardinput" autocapitalize="off"
+                autocorrect="off" autocomplete="off" spellcheck="false"
+                mozactionhint="Enter"></textarea>
+    <canvas id="noVNC_canvas" width="640px" height="20px">Canvas not supported.</canvas>
+  </div>
+
+  <div ng-show="vm.dragActive" class="drag-helper"></div>
+
+  <md-button ng-show="!vm.loading && vm.connected"
+             class="md-fab" ng-click="vm.toggleDrag();"
+             ng-class="{'active': vm.dragActive}"
+             aria-label="Drag">
+    <md-icon md-svg-icon="drag"></md-icon>
+  </md-button>
+
+  <md-button id="noVNC_keyboard_button"
+             ng-show="!vm.loading && vm.connected"
+             class="md-fab"
+             aria-label="Keyboard">
+    <md-icon md-svg-icon="keyboard"></md-icon>
+  </md-button>
+
+</div>

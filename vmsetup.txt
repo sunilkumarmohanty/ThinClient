@@ -1,0 +1,61 @@
+### install a desktop environment and tightvnc
+sudo apt-get update
+sudo apt-get install lxde tightvnc
+
+### create a script to start and stop the vnc server
+### /usr/local/bin/myvncserver
+### also need to give it exec rights:
+### sudo chmod +x /usr/local/bin/myvncserver
+
+#!/bin/bash
+PATH="$PATH:/usr/bin/"
+DISPLAY="1"
+DEPTH="16"
+GEOMETRY="1024x768"
+OPTIONS="-depth ${DEPTH} -geometry ${GEOMETRY} :${DISPLAY}"
+
+case "$1" in
+start)
+/usr/bin/vncserver ${OPTIONS}
+;;
+
+stop)
+/usr/bin/vncserver -kill :${DISPLAY}
+;;
+
+restart)
+$0 stop
+$0 start
+;;
+esac
+exit 0
+
+### create a service
+### /lib/systemd/system/myvncserver.service
+### then to autostart at boot
+### sudo systemctl daemon-reload
+### sudo systemctl enable myvncserver.service
+
+[Unit]
+Description=Manage TightVNC Server
+
+[Service]
+Type=forking
+ExecStart=/usr/local/bin/myvncserver start
+ExecStop=/usr/local/bin/myvncserver stop
+ExecReload=/usr/local/bin/myvncserver restart
+Restart=always
+User=mcc_fall_2016_g07
+
+[Install]
+WantedBy=multi-user.target
+
+### create a desktop file
+### after installing the software that is required  to on start up
+### create a openoffice.desktop file at ~/.config/autostart/ 
+
+[Desktop Entry]
+
+Type=Application
+
+Exec=openoffice4

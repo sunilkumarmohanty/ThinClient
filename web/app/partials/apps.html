@@ -1,0 +1,16 @@
+<div ng-repeat="app in vm.apps" style="flex: 1 0 auto;">
+  <md-card>
+    <img ng-src="{{app.imgSrc}}" class="md-card-image">
+    <md-card-title>
+      <md-card-title-text>
+        <span class="md-headline">{{app.name}}</span>
+      </md-card-title-text>
+    </md-card-title>
+    <md-card-content>
+      <p>{{app.description}}</p>
+    </md-card-content>
+    <md-card-actions layout="row" layout-align="end center">
+      <md-button ng-click="vm.showLaunchDialog(app)">Launch</md-button>
+    </md-card-actions>
+  </md-card>
+</div>

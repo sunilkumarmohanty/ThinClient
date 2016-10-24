@@ -1,0 +1,35 @@
+{
+  "name": "mcc-2016-g07-p1",
+  "version": "0.0.1",
+  "description": "mcc-2016-g07-p1",
+  "main": "server/server.js",
+  "scripts": {
+    "start": "node ./server/server.js",
+    "test": "./node_modules/.bin/jasmine-node --captureExceptions --verbose ./spec/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@git.niksula.hut.fi:cs-e4100/mcc-2016-g07-p1.git"
+  },
+  "license": "UNLICENSED",
+  "dependencies": {
+    "angular": "^1.5.8",
+    "angular-animate": "^1.5.8",
+    "angular-aria": "^1.5.8",
+    "angular-material": "^1.1.1",
+    "angular-ui-router": "^0.3.1",
+    "async": "^2.0.1",
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "express-force-ssl": "^0.3.2",
+    "express-session": "^1.14.1",
+    "fs": "0.0.1-security",
+    "google-cloud": "^0.41.2",
+    "https": "^1.0.0",
+    "tcp-ping": "^0.1.1"
+  },
+  "devDependencies": {
+    "jasmine-node": "^1.14.5",
+    "request": "^2.75.0"
+  }
+}

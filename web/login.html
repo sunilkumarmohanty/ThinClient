@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>MCC Project 1, Group 7, Web - Login</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+    <style media="screen">
+      * {
+        box-sizing: border-box;
+      }
+      html, body {
+        margin: 0;
+        padding: 0;
+        background: rgb(250,250,250);
+        font-family: Roboto,Helvetica Neue,sans-serif;
+      }
+      .toolbar {
+        padding: 0 16px;
+        height: 56px;
+        line-height: 56px;
+        background: rgb(63,81,181);
+        color: rgba(255,255,255,0.87);
+        font-size: 20px;
+        font-weight: 300;
+        letter-spacing: .005em;
+      }
+      .input-holder, .button-holder {
+        height: 64px;
+        width: 100%;
+        padding: 16px;
+      }
+      .input-holder label {
+        width: 100%;
+        margin-bottom: 16px;
+        font-size: 14px;
+        color: #555;
+      }
+      .input-holder input {
+        height: 30px;
+        width: 100%;
+        padding: 2px 2px 1px;
+        background: none;
+        border: 0;
+        border-bottom: 1px solid rgba(0,0,0,0.12);
+        font-size: 100%;
+      }
+      .input-holder input:focus {
+        margin-bottom: -1px;
+        border-bottom: 2px solid rgb(63,81,181);
+        outline: 0;
+      }
+      .button-holder input {
+        float: right;
+        cursor: pointer;
+        min-height: 36px;
+        min-width: 88px;
+        line-height: 36px;
+        text-align: center;
+        border-radius: 3px;
+        border: 0;
+        padding: 0 6px;
+        margin: 6px 8px;
+        background: rgb(63,81,181);
+        color: rgba(255,255,255,0.87);
+        white-space: nowrap;
+        text-transform: uppercase;
+        font-weight: 300;
+        font-size: 14px;
+        box-shadow: 0 2px 5px 0 rgba(0,0,0,.26);
+      }
+      .error-holder {
+        display: none;
+        margin: 32px 16px 0;
+        padding: 16px;
+        border-radius: 3px;
+        background: rgb(240,240,240);
+        font-size: 14px;
+      }
+    </style>
+
+  </head>
+
+  <body>
+    <div class="toolbar">
+      <span>MCC P1</span>
+    </div>
+    <div class="login">
+      <form>
+        <div class="input-holder">
+          <label for="username">Username *</label>
+          <input id="username" type="text" name="username" required>
+        </div>
+        <div class="input-holder">
+          <label for="password">Password *</label>
+          <input id="password" type="password" name="password" required>
+        </div>
+        <div class="error-holder"></div>
+        <div class="button-holder">
+          <input type="submit" value="Login">
+        </div>
+      </form>
+    </div>
+
+    <script src="jquery-custom.min.js"></script>
+    <script type="text/javascript">
+      // remove possible hash from the url (using HTML5 history API)
+      if (history) {
+        history.pushState("", document.title, window.location.pathname + window.location.search);
+      }
+
+      $('form').submit(function(e) {
+        var un = $('#username').val();
+        var pw = $('#password').val();
+
+        $.ajax({
+          method: 'post',
+          url: '/login',
+          data: {
+            'userid': un,
+            'password': pw
+          }
+        }).done(function(res) {
+          window.location.href = '/'
+        }).fail(function(jqxhr, status, error) {
+          if (jqxhr.hasOwnProperty('responseText')) {
+            $('.error-holder').text(jqxhr.responseText);
+          } else {
+            $('.error-holder').text(error);
+          }
+          $('.error-holder').show();
+        });
+
+        e.preventDefault();
+      });
+    </script>
+  </body>
+
+</html>
