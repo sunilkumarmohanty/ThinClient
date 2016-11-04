@@ -41,6 +41,3 @@ dependencies {
     compile files('libs/jmdns.jar')
     compile 'com.google.android.gms:play-services:8.3.0'
 }
-allprojects {
-    buildDir = "C:/tmp/${rootProject.name}/${project.name}"
-}
